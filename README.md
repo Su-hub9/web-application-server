@@ -15,7 +15,14 @@
 * 각 요구사항을 구현하는 것이 중요한 것이 아니라 구현 과정을 통해 학습한 내용을 인식하는 것이 배움에 중요하다. 
 
 ### 요구사항 1 - http://localhost:8080/index.html로 접속시 응답
-* 
+* InputStream , OutputStream은 Byte 단위라서 영어나 숫자 등은 잘 출력되는데, 단위가 2Byte인 한글은 깨져서 출력된다.  
+  그래서 char 단위인 InputStreamReader를 쓴다. 또한 한글자씩 받아와야 하는 상황이 아니면 버퍼에 저장하여 한꺼번에 받는 방식을 많이 사용한다.
+  ```
+  InputStream in = connection.getInputStream();
+  BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+  ```
+* BufferedReader.readLine()은 개행문자가 포함되어야 내부 blocking이 풀리면서 wihle문이 실행한다.
+* 자바에서의 개행문자는 "\n" 이지만, 스트림에서의 개행문자는 "\r\n"이 개행문자이다.
 
 ### 요구사항 2 - get 방식으로 회원가입
 * 
